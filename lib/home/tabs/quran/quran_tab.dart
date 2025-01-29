@@ -396,7 +396,7 @@ class QuranTab extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 20),
-              child: Text("Most Recently",
+              child: Text("Most Recently \n test",
                   style: Theme.of(context).textTheme.titleLarge),
             ),
             Container(
