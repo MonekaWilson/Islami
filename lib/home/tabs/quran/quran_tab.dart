@@ -361,7 +361,7 @@ class QuranTab extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.all(20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset(
               "assets/images/quran_logo.png",
@@ -396,7 +396,7 @@ class QuranTab extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 20),
-              child: Text("Most Recently \n test",
+              child: Text("Most Recently",
                   style: Theme.of(context).textTheme.titleLarge),
             ),
             Container(
@@ -407,7 +407,7 @@ class QuranTab extends StatelessWidget {
                 color: AppColor.primaryColor,
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
