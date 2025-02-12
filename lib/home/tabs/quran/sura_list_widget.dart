@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:islami/app-colors.dart';
+import 'package:islami/models/sura_model.dart';
 
 class SuraListWidget extends StatelessWidget {
-  String suraEnName;
-  String suraArName;
-  String ayaNumber;
+  SuraModel suraModel;
   int index;
 
-  SuraListWidget(
-      {required this.ayaNumber,
-      required this.suraArName,
-      required this.suraEnName,
-      required this.index});
+  SuraListWidget({
+    required this.suraModel,
+    required this.index,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +23,11 @@ class SuraListWidget extends StatelessWidget {
               color: AppColor.white,
               fit: BoxFit.cover,
             ),
-            Text("$index", style: Theme.of(context).textTheme.titleMedium),
+            Text("${index + 1}",
+                style: Theme.of(context).textTheme.titleMedium),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           width: 20,
         ),
         Expanded(
@@ -38,12 +37,12 @@ class SuraListWidget extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(suraEnName,
+                  Text(SuraModel.suraEnglishList[index],
                       style: Theme.of(context).textTheme.titleMedium),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
-                  Text("$ayaNumber Verses",
+                  Text(" ${SuraModel.numOfVersesList[index]} Verses",
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium
@@ -54,7 +53,7 @@ class SuraListWidget extends StatelessWidget {
           ),
         ),
         Text(
-          suraArName,
+          SuraModel.suraArabicList[index],
           style: Theme.of(context).textTheme.titleMedium,
         ),
       ],

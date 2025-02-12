@@ -80,6 +80,8 @@ class _HadethTabState extends State<HadethTab> {
                                   textDirection: TextDirection.rtl,
                                   child: Text(
                                     hadethList[itemIndex].content.join(""),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 12,
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,

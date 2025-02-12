@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:islami/models/sura_model.dart';
 
 import '../../../app-colors.dart';
 import 'item_sura_content.dart';
@@ -18,23 +19,23 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var args = ModalRoute.of(context)?.settings.arguments as SuraDetailsArgs;
+    var args = ModalRoute.of(context)?.settings.arguments as SuraModel;
     if (verses.isEmpty) {
-      loadFile(args.index);
+      loadFile(args.fileName);
     }
     return Scaffold(
       backgroundColor: AppColor.black,
       appBar: AppBar(
         title: Text(
-          args.suraEnName,
+          args.suraEnglishName,
           style: Theme.of(context).textTheme.headlineLarge,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Row(
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Image.asset(
@@ -42,7 +43,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
                   fit: BoxFit.fill,
                 ),
                 Text(
-                  args.suraArName,
+                  args.suraArabicName,
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge
@@ -54,41 +55,40 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
                 ),
               ],
             ),
-            Expanded(
-              child: verses.isEmpty
-                  ? Center(
-                      child: CircularProgressIndicator(
-                      color: AppColor.primaryColor,
-                    ))
-                  : ListView.builder(
-                      itemBuilder: (context, index) {
-                        return ItemSuraContect(
-                          content: verses[index],
-                          index: index,
-                        );
-                      },
-                      itemCount: verses.length,
-                    ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Image.asset(
-                  "assets/images/sura_detials/sura_details_buttom.png",
-                  fit: BoxFit.cover,
-                )
-              ],
-            )
-          ],
-        ),
+          ),
+          Expanded(
+            child: verses.isEmpty
+                ? Center(
+                    child: CircularProgressIndicator(
+                    color: AppColor.primaryColor,
+                  ))
+                : ListView.builder(
+                    itemBuilder: (context, index) {
+                      return ItemSuraContect(
+                        content: verses[index],
+                        index: index,
+                      );
+                    },
+                    itemCount: verses.length,
+                  ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Image.asset(
+                "assets/images/sura_detials/sura_details_buttom.png",
+                fit: BoxFit.cover,
+              )
+            ],
+          )
+        ],
       ),
     );
   }
 
-  void loadFile(int index) async {
-    String content =
-        await rootBundle.loadString("assets/files/${index + 1}.txt");
-    List<String> lines = content.split("\n");
+  void loadFile(String fileName) async {
+    String content = await rootBundle.loadString("assets/files/$fileName");
+    List<String> lines = content.trim().split("\n");
     verses = lines;
     setState(() {});
   }
