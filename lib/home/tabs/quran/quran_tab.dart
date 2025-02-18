@@ -72,12 +72,11 @@ class _QuranTabState extends State<QuranTab> {
                 ),
                 onChanged: (text) {
                   setState(() {
-                    searchText = text.toLowerCase();
+                    searchText = text;
                     filterList = SuraModel.suraList.where((sura) {
-                      return sura.suraArabicName.contains(searchText) ||
-                          sura.suraEnglishName
-                              .toLowerCase()
-                              .contains(searchText);
+                      return sura.suraEnglishName
+                          .toLowerCase()
+                          .contains(searchText.toLowerCase());
                     }).toList();
                   });
                 },
@@ -103,9 +102,7 @@ class _QuranTabState extends State<QuranTab> {
                     final sura = filterList[index];
                     return InkWell(
                       onTap: () {
-                        final selectedSura =
-                            filterList[index]; // خليك على الفلتر
-
+                        final selectedSura = filterList[index];
                         saveLastSura(
                           suraEngName: selectedSura.suraEnglishName,
                           suraArbName: selectedSura.suraArabicName,
